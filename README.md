@@ -9,8 +9,8 @@
 ### 2025-02
 
 ## Integrantes
-- [Nome](https://github.com/xxx)
-- [Nome](https://github.com/xxx)
+- [Guilherme Orlandi](https://github.com/carrico05)
+- [Arthur Borba](https://github.com/Borba70)
 
 ## Cliente do Projeto
 
