@@ -1,20 +1,22 @@
 from openai import OpenAI
 from config import api_key
-import whisper
-
-model = whisper.load_model("medium")
-
-result = model.transcribe("escopo.ogg", language="pt")
-
-with open("transcricao.txt", "w", encoding="utf-8") as file:
-    file.write(result["text"])
 
 client = OpenAI(api_key=api_key)
-audio_file= open("WhatsApp Ptt 2025-08-18 at 15.30.03.ogg", "rb")
 
-transcription = client.audio.transcriptions.create(
-    model="gpt-4o-transcribe", 
-    file=audio_file
-)
-
-print(transcription.text)
+def transcribe_with_timestamps():
+    audio_path = "WhatsApp Ptt 2025-08-18 at 15.30.03.ogg"
+    with open(audio_path, "rb") as audio_file:
+        transcription = client.audio.transcriptions.create(
+            file=audio_file,
+            model="whisper-1",
+            response_format="verbose_json",
+            timestamp_granularities=["word"]
+        )
+    return [
+        {
+            "start": word,
+            "end": word,
+            "word" : word
+        }
+        for word in transcription.words
+    ]
