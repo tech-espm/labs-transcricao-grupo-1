@@ -9,8 +9,9 @@
 ### 2025-02
 
 ## Integrantes
-- [Guilherme Orlandi](https://github.com/carrico05)
 - [Arthur Borba](https://github.com/Borba70)
+- [Guilherme Orlandi](https://github.com/carrico05)
+- [Luzivania Bonfim]  (https://github.com/bonfim1)
 
 ## Cliente do Projeto
 
