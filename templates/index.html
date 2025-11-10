@@ -110,6 +110,7 @@
       transition: background-color 0.2s;
       font-weight: 500;
       margin: 0.25rem;
+      display: inline-block;
     }
 
     button:hover, label[role="button"]:hover {
@@ -322,13 +323,8 @@
           <label for="file-input" id="file-label" role="button" tabindex="0">
             Selecionar arquivo
           </label>
-          <input id="file-input" type="file" accept="audio/*" multiple style="display:none" />
+          <input id="file-input" type="file" accept="audio/*" multiple style="display:none" onchange="atualizarLabel()" />
           <ul id="file-list" aria-live="polite"></ul>
-          <script>
-            document.getElementById('file-label').addEventListener('click', () => {
-            document.getElementById('file-input').click();
-            });
-          </script>
         </div>
       </article>
 
@@ -390,6 +386,16 @@
         localStorage.setItem('theme', 'light');
       }
     });
+
+    function atualizarLabel() {
+      let fileLabel = document.getElementById("file-label");
+      let fileInput = document.getElementById("file-input");
+      if (!fileInput.files || !fileInput.files.length) {
+        fileLabel.textContent = "Selecionar arquivo";
+        return;
+      }
+      fileLabel.textContent = "Arquivo selecionado: " + fileInput.files[0].name;
+    }
   </script>
 </body>
 </html>
