@@ -251,7 +251,6 @@
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-/* ------------------ TEMA ------------------ */
 const themeSwitch = document.getElementById("theme-switch");
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "dark") {
@@ -263,7 +262,6 @@ themeSwitch.addEventListener("change", () => {
   localStorage.setItem("theme", themeSwitch.checked ? "dark" : "light");
 });
 
-/* ------------------ UPLOAD ------------------ */
 const fileInput = document.getElementById("file-input");
 const fileList = document.getElementById("file-list");
 const audioPlayer = document.getElementById("audio-player");
@@ -287,7 +285,6 @@ fileInput.addEventListener("change", () => {
   submitBtn.disabled = false;
 });
 
-/* ------------------ GRAVAÇÃO ------------------ */
 
 const recStatus = document.getElementById("rec-status");
 const recordStart = document.getElementById("record-start");
@@ -361,7 +358,6 @@ recordStop.onclick = () => {
   isPaused = false;
 };
 
-/* ------------------ TRANSCREVER ------------------ */
 submitBtn.addEventListener("click", () => {
   if (!audioBlob) return;
 
