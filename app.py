@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 import config
+from endpoint import endpoint
 
 app = Flask(__name__)
+app.register_blueprint(endpoint)
 
 @app.get('/')
 def index():

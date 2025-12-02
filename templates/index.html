@@ -6,7 +6,7 @@
   <title>Transcrição — Upload e Gravação</title>
 
   <style>
-    /* reset */
+    /* RESET */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,15 +18,15 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color .3s, color .3s;
     }
 
-    h1, h2, h3, h4 {
+    h1, h2, h3 {
       font-weight: 600;
       color: var(--heading);
     }
 
-    /* tema claro e escuro */
+    /* TEMAS */
     :root {
       --bg: #f8f9fb;
       --text: #222;
@@ -47,28 +47,17 @@
       --primary-hover: #5badff;
     }
 
-    
     header, footer {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border-bottom: 1px solid var(--border);
       text-align: center;
       padding: 1.5rem 1rem;
-      position: relative;
-      transition: background-color 0.3s, border-color 0.3s;
+      transition: background .3s, border-color .3s;
     }
-
     footer {
       border-top: 1px solid var(--border);
       margin-top: 3rem;
-      padding: 1rem;
-      color: var(--text);
-      font-size: 0.9rem;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1rem;
+      font-size: .9rem;
     }
 
     main {
@@ -82,314 +71,332 @@
       border-radius: 8px;
       padding: 1.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       border: 1px solid var(--border);
-      transition: background-color 0.3s, border-color 0.3s;
     }
 
     h2 {
       font-size: 1.4rem;
       margin-bottom: 1rem;
       border-left: 4px solid var(--primary);
-      padding-left: 0.5rem;
+      padding-left: .5rem;
     }
 
-    h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    /* botões */
     button, label[role="button"] {
-      background-color: var(--primary);
+      background: var(--primary);
       color: #fff;
       border: none;
-      padding: 0.6rem 1rem;
+      padding: .6rem 1rem;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background .2s;
       font-weight: 500;
-      margin: 0.25rem;
+      margin: .25rem;
     }
-
     button:hover, label[role="button"]:hover {
-      background-color: var(--primary-hover);
+      background: var(--primary-hover);
     }
-
     button:disabled {
-      background-color: #999;
+      background: #999;
       cursor: not-allowed;
     }
 
-    /* switch modo escuro */
+    /* TEMA */
     .theme-toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
-
     .switch {
       position: relative;
       display: inline-block;
-      width: 48px;
-      height: 24px;
+      width: 50px;
+      height: 25px;
     }
-
     .switch input {
       opacity: 0;
-      width: 0;
-      height: 0;
     }
-
     .slider {
       position: absolute;
       cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: 0.3s;
-      border-radius: 24px;
+      inset: 0;
+      background: #ccc;
+      border-radius: 25px;
+      transition: .3s;
     }
-
     .slider:before {
-      position: absolute;
       content: "";
-      height: 18px;
-      width: 18px;
+      position: absolute;
+      width: 19px;
+      height: 19px;
       left: 3px;
       bottom: 3px;
-      background-color: white;
-      transition: 0.3s;
+      background: #fff;
       border-radius: 50%;
+      transition: .3s;
     }
-
     input:checked + .slider {
-      background-color: var(--primary);
+      background: var(--primary);
     }
-
     input:checked + .slider:before {
       transform: translateX(24px);
     }
 
-    /* upload */
+    /* UPLOAD */
     #drop-area {
       border: 2px dashed var(--primary);
-      background: rgba(0,123,255,0.05);
-      border-radius: 8px;
       padding: 1.5rem;
       text-align: center;
-      margin-top: 1rem;
-      transition: background 0.3s;
-    }
-
-    #file-list {
-      margin-top: 1rem;
-      list-style: none;
-      color: var(--text);
+      border-radius: 8px;
+      background: rgba(0,123,255,0.05);
     }
 
     #file-list li {
       background: var(--bg);
-      padding: 0.5rem;
-      margin-bottom: 0.3rem;
+      padding: .5rem;
+      border: 1px solid var(--border);
+      margin-top: .4rem;
       border-radius: 5px;
-      border: 1px solid var(--border);
     }
 
-    /* gravação */
-    #recorder-controls {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+    /* PLAYER */
+    #audio-player {
+      margin-top: 1rem;
     }
 
-    #rec-status {
-      margin-left: 0.5rem;
-      font-weight: 500;
-    }
-
-    #waveform {
+    /* PROGRESSO */
+    #progress {
       width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      margin-top: 1rem;
-      background: var(--bg);
+      height: 10px;
+      background: var(--border);
+      border-radius: 5px;
+      margin-top: .5rem;
+      display: none;
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      border-radius: 5px;
+      transition: width .2s linear;
     }
 
-    #record-settings {
-      margin-top: 1rem;
-    }
-
-    select {
-      padding: 0.4rem 0.6rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      margin-top: 0.3rem;
-      margin-bottom: 0.8rem;
-      display: block;
-      width: 100%;
-      max-width: 300px;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    /*transcrição */
-    #results {
-      margin-top: 1rem;
-    }
-
-    #result-actions {
-      margin-bottom: 1rem;
-    }
-
+    /* TRANSCRIÇÃO */
     #transcript {
-      background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1rem;
       min-height: 150px;
-      font-family: monospace;
-      white-space: pre-wrap;
-      overflow-y: auto;
-      color: var(--text);
-    }
-
-    #transcript .placeholder {
-      color: #888;
-    }
-
-    /* histórico */
-    #history-list {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 1rem;
-    }
-
-    #history-list li {
-      padding: 0.5rem;
+      padding: 1rem;
+      border-radius: 6px;
       background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      margin-bottom: 0.4rem;
-    }
-
-    /* acessibilidade */
-    .visually-hidden {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
+      margin-top: 1rem;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 
 <body>
-  <header role="banner" class="header">
-    <div class="container">
-      <h1 id="site-title">Transcrição</h1>
-      <p id="site-subtitle">Suba um áudio ou grave diretamente pelo navegador</p>
-    </div>
+<header>
+  <h1>Transcrição</h1>
+  <p>Suba um áudio ou grave diretamente pelo navegador</p>
 
-    <!-- Botão switch -->
-    <div class="theme-toggle">
-      <label class="switch">
-        <input type="checkbox" id="theme-switch" aria-label="Alternar modo escuro">
-        <span class="slider"></span>
-      </label>
-    </div>
-  </header>
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+</header>
 
-  <main id="main" role="main">
-    
-    <section id="actions" aria-labelledby="actions-title">
-      <h2 id="actions-title">Como você quer enviar o áudio?</h2>
+<main>
 
-      <article id="upload-section" aria-labelledby="upload-title">
-        <h3 id="upload-title">Enviar arquivo</h3>
+<section>
+  <h2>Enviar arquivo</h2>
 
-        <div id="drop-area" role="region" aria-label="Área de arrastar e soltar">
-          <p id="drop-instructions">Arraste e solte arquivos de áudio aqui ou use o botão para selecionar.</p>
+  <div id="drop-area">
+    <label for="file-input" role="button">Selecionar arquivo</label>
+    <input id="file-input" type="file" accept="audio/*" style="display:none">
+    <ul id="file-list"></ul>
+  </div>
 
-          <label for="file-input" id="file-label" role="button" tabindex="0">
-            Selecionar arquivo
-          </label>
-          <input id="file-input" type="file" accept="audio/*" multiple style="display:none" />
-          <ul id="file-list" aria-live="polite"></ul>
-          <script>
-            document.getElementById('file-label').addEventListener('click', () => {
-            document.getElementById('file-input').click();
-            });
-          </script>
-        </div>
-      </article>
+  <audio id="audio-player" controls style="display:none"></audio>
 
-      <article id="record-section" aria-labelledby="record-title">
-        <h3 id="record-title">Gravar pelo dispositivo</h3>
-        <div id="recorder-controls" role="region" aria-label="Controles de gravação">
-          <button id="record-start" aria-pressed="false">Iniciar gravação</button>
-          <button id="record-pause" disabled>Pause</button>
-          <button id="record-stop" disabled>Parar</button>
-          <span id="rec-status" aria-live="polite">Pronto para gravar</span>
-          <span id="rec-timer" aria-live="polite">00:00</span>
-        </div>
-        <canvas id="waveform" width="800" height="100"></canvas>
-      </article>
-    </section>
+  <div id="progress"><div id="progress-bar"></div></div>
+</section>
 
-    <section id="transcription">
-      <h2>Transcrição</h2>
-      <label for="language">Idioma</label>
-      <select id="language">
-        <option value="pt-BR" selected>Português</option>
-        <option value="en-US">Inglês</option>
-      </select>
-      <button id="submit-transcription" disabled>Solicitar transcrição</button>
+<section>
+  <h2>Gravar pelo navegador</h2>
 
-      <div id="results">
-        <h3>Resultado</h3>
-        <article id="transcript">
-          <p class="placeholder">Nenhuma transcrição ainda.</p>
-        </article>
-      </div>
-    </section>
-  </main>
+  <button id="record-start">Iniciar gravação</button>
+  <button id="record-pause" disabled>Pausar</button>
+  <button id="record-stop" disabled>Parar</button>
 
-  <footer role="contentinfo">
-    <div class="container">
-      <small id="legal">© <span id="year"></span> Transcrição — Todos os direitos reservados</small>
-    </div>
-  </footer>
+  <p id="rec-status">Pronto para gravar</p>
+</section>
 
-  <script>
-    // Atualiza o ano
-    document.getElementById('year').textContent = new Date().getFullYear();
+<section>
+  <h2>Transcrição</h2>
+  <button id="submit-transcription" disabled>Enviar para transcrição</button>
 
-    // Dark mode switch
-    const themeSwitch = document.getElementById('theme-switch');
-    const userPref = localStorage.getItem('theme');
-    if (userPref === 'dark') {
-      document.body.classList.add('dark');
-      themeSwitch.checked = true;
+  <div id="transcript">
+    <p>Nenhuma transcrição ainda.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> — Todos os direitos reservados
+</footer>
+
+<script>
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ------------------ TEMA ------------------ */
+const themeSwitch = document.getElementById("theme-switch");
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark");
+  themeSwitch.checked = true;
+}
+themeSwitch.addEventListener("change", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("theme", themeSwitch.checked ? "dark" : "light");
+});
+
+/* ------------------ UPLOAD ------------------ */
+const fileInput = document.getElementById("file-input");
+const fileList = document.getElementById("file-list");
+const audioPlayer = document.getElementById("audio-player");
+const submitBtn = document.getElementById("submit-transcription");
+const transcriptBox = document.getElementById("transcript");
+
+const progress = document.getElementById("progress");
+const progressBar = document.getElementById("progress-bar");
+
+let audioBlob = null;
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  fileList.innerHTML = `<li>${file.name}</li>`;
+  audioPlayer.src = URL.createObjectURL(file);
+  audioPlayer.style.display = "block";
+
+  audioBlob = file;
+  submitBtn.disabled = false;
+});
+
+/* ------------------ GRAVAÇÃO ------------------ */
+
+const recStatus = document.getElementById("rec-status");
+const recordStart = document.getElementById("record-start");
+const recordPause = document.getElementById("record-pause");
+const recordStop = document.getElementById("record-stop");
+
+let mediaRecorder;
+let chunks = [];
+let isPaused = false;
+let timerInterval;
+let seconds = 0;
+
+function updateTimer() {
+  seconds++;
+  recStatus.textContent = "Gravando... " + seconds + "s";
+}
+
+recordStart.onclick = async () => {
+  chunks = [];
+  seconds = 0;
+
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+
+  mediaRecorder.ondataavailable = e => chunks.push(e.data);
+
+  mediaRecorder.onstop = () => {
+    audioBlob = new Blob(chunks, { type: "audio/webm" });
+    audioPlayer.src = URL.createObjectURL(audioBlob);
+    audioPlayer.style.display = "block";
+    submitBtn.disabled = false;
+
+    recStatus.textContent = "Gravação finalizada";
+    clearInterval(timerInterval);
+  };
+
+  mediaRecorder.start();
+  recStatus.textContent = "Gravando... 0s";
+
+  timerInterval = setInterval(updateTimer, 1000);
+
+  recordPause.disabled = false;
+  recordStop.disabled = false;
+  recordStart.disabled = true;
+};
+
+recordPause.onclick = () => {
+  if (!isPaused) {
+    mediaRecorder.pause();
+    clearInterval(timerInterval);
+    recStatus.textContent = "Pausado";
+    recordPause.textContent = "Retomar";
+  } else {
+    mediaRecorder.resume();
+    timerInterval = setInterval(updateTimer, 1000);
+    recordPause.textContent = "Pausar";
+    recStatus.textContent = "Gravando... " + seconds + "s";
+  }
+  isPaused = !isPaused;
+};
+
+recordStop.onclick = () => {
+  mediaRecorder.stop();
+  clearInterval(timerInterval);
+
+  recordStart.disabled = false;
+  recordPause.disabled = true;
+  recordStop.disabled = true;
+
+  recordPause.textContent = "Pausar";
+  isPaused = false;
+};
+
+/* ------------------ TRANSCREVER ------------------ */
+submitBtn.addEventListener("click", () => {
+  if (!audioBlob) return;
+
+  progress.style.display = "block";
+  progressBar.style.width = "0%";
+
+  transcriptBox.innerHTML = "<p>Processando...</p>";
+
+  const form = new FormData();
+  form.append("audio", audioBlob, "audio.webm");
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:5000/upload-audio");
+
+  xhr.upload.onprogress = e => {
+    if (e.lengthComputable) {
+      const pct = (e.loaded / e.total) * 100;
+      progressBar.style.width = pct + "%";
     }
+  };
 
-    themeSwitch.addEventListener('change', () => {
-      if (themeSwitch.checked) {
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-    });
-  </script>
+  xhr.onload = () => {
+    const res = JSON.parse(xhr.responseText);
+    progress.style.display = "none";
+
+    if (xhr.status === 200) {
+      transcriptBox.textContent = res.transcricao;
+    } else {
+      transcriptBox.textContent = "Erro: " + res.erro;
+    }
+  };
+
+  xhr.send(form);
+});
+</script>
+
 </body>
 </html>
